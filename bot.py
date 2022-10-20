@@ -14,4 +14,4 @@ while True:
         spot(coin)
 
 
-    sleep(6)
+    sleep(600)
