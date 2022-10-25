@@ -121,12 +121,14 @@ def panic_sell(coin):
         print('Panic sold! : ', coin['ticker'])
         print (buy_price(coin)/coin['price'])
         sell(coin)
+        logging.info("Panic sold: %s : %s", coin['ticker'],str(buy_price(coin)/coin['price']))
 
 def fomo_buy(coin):
     global FOMO_BUY_THRESH
     if buy_price(coin)/coin["price"] > FOMO_BUY_THRESH:
         print("FOMO'd into: ", coin['ticker'])
         buy(coin)
+        logging.info("Fomo'd into:  %s : %s", coin['ticker'], str(coin['price']))
 
 def my_wealth():
     wealth = 0.00
@@ -174,17 +176,19 @@ def av_buy_sell(coin):
         if coin['price']/get_average(coin) > AV_BUY_THRESH:
             print('average buy executed')
             buy(coin)
+            logging.info("average buy into:  %s : %s", coin['ticker'], str(coin['price']))
         if coin['price']/get_average(coin) < AV_SELL_THRESH:
             print('Average sell executed')
             sell(coin)
+            logging.info("average sold out of:  %s : %s", coin['ticker'], str(coin['price']))
 
 
 def spot (coin):
     if buy_price(coin)/coin['price'] >= SPOT_SELL_THRESH:
         sell(coin)
-        logging.info ("spot sell: " + coin['ticker'])
+        logging.info ("spot sell: %s : @: %s",coin['ticker'], str(coin['price']))
     if  buy_price(coin)/coin['price'] <= SPOT_BUY_THRESH:
-        logging.info("spot buy: " + coin['ticker'])
+        logging.info ("spot buy: %s : @: %s",coin['ticker'], str(coin['price']))
         buy(coin)
 def init():
     buy(btc)
